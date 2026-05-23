@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부미사 아마존 검색</title>
+    <style>
+        body {
+            font-family: "나눔고딕", Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .nav a {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            color: #555;
+            background-color: #f8f8f8;
+            transition: background-color 0.2s;
+        }
+        .nav a.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .nav a:not(.active):hover {
+            background-color: #e9ecef;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-row {
+            display: flex;
+            gap: 8px;
+        }
+        .search-row input {
+            flex: 1;
+            font-size: 16px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .search-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: background-color 0.3s ease;
+        }
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+        .country-links {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .country-link {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .country-link:hover {
+            background-color: #e9ecef;
+        }
+        .info {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>부미사 구매대행</h1>
+
+        <div class="nav" id="nav"></div>
+
+        <div class="search-box">
+            <div class="search-row">
+                <input type="text" id="searchQuery" placeholder="검색어 입력" autofocus
+                    onkeydown="if(event.key==='Enter') searchAmazon()">
+                <button class="search-btn" onclick="searchAmazon()">검색</button>
+            </div>
+            <div class="country-links" id="countryLinks" style="display:none;">
+                <button class="country-link" onclick="searchCountry('us')">🇺🇸 미국</button>
+                <button class="country-link" onclick="searchCountry('de')">🇩🇪 독일</button>
+                <button class="country-link" onclick="searchCountry('uk')">🇬🇧 영국</button>
+            </div>
+        </div>
+
+        <div class="info">검색 버튼: 3개국 동시 검색 / 국가 버튼: 개별 검색</div>
+    </div>
+
+    <script src="js/nav.js"></script>
+    <script>
+        var amazonUrls = {
+            us: "https://www.amazon.com/s?k=",
+            de: "https://www.amazon.de/s?k=",
+            uk: "https://www.amazon.co.uk/s?k="
+        };
+
+        function getQuery() {
+            return document.getElementById("searchQuery").value.trim();
+        }
+
+        function searchAmazon() {
+            var query = getQuery();
+            if (!query) return;
+            var encoded = encodeURIComponent(query);
+            window.open(amazonUrls.us + encoded, "_blank");
+            window.open(amazonUrls.de + encoded, "_blank");
+            window.open(amazonUrls.uk + encoded, "_blank");
+            document.getElementById("countryLinks").style.display = "flex";
+        }
+
+        function searchCountry(country) {
+            var query = getQuery();
+            if (!query) return;
+            window.open(amazonUrls[country] + encodeURIComponent(query), "_blank");
+        }
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                document.getElementById("searchQuery").value = "";
+                document.getElementById("countryLinks").style.display = "none";
+                document.getElementById("searchQuery").focus();
+            }
+        });
+    </script>
+</body>
+</html>
