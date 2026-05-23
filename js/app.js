@@ -14,6 +14,7 @@ function initDropdowns() {
         const opt = document.createElement("option");
         opt.value = w;
         opt.textContent = w.toFixed(1);
+        if (w === 1.0) opt.selected = true;
         weightEl.appendChild(opt);
     });
 
@@ -33,7 +34,7 @@ function resetFields() {
     document.getElementById("usRate2").textContent = "";
     document.getElementById("deRate2").textContent = "";
     document.getElementById("ukRate2").textContent = "";
-    document.getElementById("weight").selectedIndex = 0;
+    document.getElementById("weight").value = "1";
     document.getElementById("quantity").value = "1";
     document.getElementById("sellingPrice").focus();
 }
