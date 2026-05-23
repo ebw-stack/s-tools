@@ -1,17 +1,20 @@
 (function() {
     var params = window.location.search;
-    var currentPage = window.location.pathname.split("/").pop() || "index.html";
+    var path = window.location.pathname;
+    var isSearch = path.indexOf("/search") !== -1;
+    var base = isSearch ? "../" : "";
     var links = [
-        { href: "search.html", label: "아마존 검색" },
-        { href: "index.html", label: "마진 계산기" }
+        { href: base + "search/", key: "search", label: "아마존 검색" },
+        { href: base, key: "index", label: "마진 계산기" }
     ];
+    var currentKey = isSearch ? "search" : "index";
     var nav = document.getElementById("nav");
     if (!nav) return;
     links.forEach(function(link) {
         var a = document.createElement("a");
         a.href = link.href + params;
         a.textContent = link.label;
-        if (currentPage === link.href) a.className = "active";
+        if (link.key === currentKey) a.className = "active";
         nav.appendChild(a);
     });
 })();
