@@ -197,24 +197,33 @@
             </div>
             <div class="row-3">
                 <div>
-                    <label for="usPrice">🇺🇸 현지가 ($)</label>
+                    <div class="row" style="gap:4px; align-items:center;">
+                        <div style="flex:2;"><label>🇺🇸 현지가 ($)</label></div>
+                        <div style="flex:1;"><label>수량</label></div>
+                    </div>
                     <div class="row" style="gap:4px;">
                         <div style="flex:2;"><input type="text" id="usPrice" tabindex="3" placeholder="$" oninput="sanitizeInput(this); calculateUS()"></div>
-                        <div style="flex:1;"><input type="text" id="usQty" tabindex="4" value="1" placeholder="수량" oninput="sanitizeInput(this); calculateUS()"></div>
+                        <div style="flex:1;"><input type="text" id="usQty" tabindex="4" value="1" oninput="sanitizeInput(this); calculateUS()"></div>
                     </div>
                 </div>
                 <div>
-                    <label for="dePrice">🇩🇪 현지가 (€)</label>
+                    <div class="row" style="gap:4px; align-items:center;">
+                        <div style="flex:2;"><label>🇩🇪 현지가 (€)</label></div>
+                        <div style="flex:1;"><label>수량</label></div>
+                    </div>
                     <div class="row" style="gap:4px;">
                         <div style="flex:2;"><input type="text" id="dePrice" tabindex="5" placeholder="€" oninput="sanitizeInput(this); calculateDE()"></div>
-                        <div style="flex:1;"><input type="text" id="deQty" tabindex="6" value="1" placeholder="수량" oninput="sanitizeInput(this); calculateDE()"></div>
+                        <div style="flex:1;"><input type="text" id="deQty" tabindex="6" value="1" oninput="sanitizeInput(this); calculateDE()"></div>
                     </div>
                 </div>
                 <div>
-                    <label for="ukPrice">🇬🇧 현지가 (£)</label>
+                    <div class="row" style="gap:4px; align-items:center;">
+                        <div style="flex:2;"><label>🇬🇧 현지가 (£)</label></div>
+                        <div style="flex:1;"><label>수량</label></div>
+                    </div>
                     <div class="row" style="gap:4px;">
                         <div style="flex:2;"><input type="text" id="ukPrice" tabindex="7" placeholder="£" oninput="sanitizeInput(this); calculateUK()"></div>
-                        <div style="flex:1;"><input type="text" id="ukQty" tabindex="8" value="1" placeholder="수량" oninput="sanitizeInput(this); calculateUK()"></div>
+                        <div style="flex:1;"><input type="text" id="ukQty" tabindex="8" value="1" oninput="sanitizeInput(this); calculateUK()"></div>
                     </div>
                 </div>
             </div>
