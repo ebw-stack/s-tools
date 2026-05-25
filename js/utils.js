@@ -42,9 +42,6 @@ function getWeight() {
     return parseFloat(document.getElementById("weight").value);
 }
 
-function getQuantity() {
-    return parseInt(document.getElementById("quantity").value) || 1;
-}
 
 function showResult(elId, rateElId, profit, sellingPrice) {
     const el = document.getElementById(elId);

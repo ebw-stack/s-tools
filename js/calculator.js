@@ -3,7 +3,7 @@ function calculateUS() {
     const localPrice = parseFloat(document.getElementById("usPrice").value);
     const exchangeRate = parseFloat(document.getElementById("usRate").value);
     const weight = getWeight();
-    const quantity = getQuantity();
+    const quantity = parseInt(document.getElementById("usQty").value) || 1;
     const resultEl = document.getElementById("usResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
@@ -29,7 +29,7 @@ function calculateDE() {
     const localPrice = parseFloat(document.getElementById("dePrice").value);
     const exchangeRate = parseFloat(document.getElementById("deRate").value);
     const weight = getWeight();
-    const quantity = getQuantity();
+    const quantity = parseInt(document.getElementById("deQty").value) || 1;
     const resultEl = document.getElementById("deResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
@@ -56,7 +56,7 @@ function calculateUK() {
     const localPrice = parseFloat(document.getElementById("ukPrice").value);
     const exchangeRate = parseFloat(document.getElementById("ukRate").value);
     const weight = getWeight();
-    const quantity = getQuantity();
+    const quantity = parseInt(document.getElementById("ukQty").value) || 1;
     const resultEl = document.getElementById("ukResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
