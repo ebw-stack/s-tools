@@ -39,7 +39,7 @@ function getSellingPrice() {
 }
 
 function getWeight() {
-    return parseFloat(document.getElementById("weight").value);
+    return parseFloat(document.getElementById("weight").value) + 1.0;
 }
 
 
