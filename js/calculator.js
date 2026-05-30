@@ -12,7 +12,7 @@ function calculateUS() {
         return;
     }
 
-    const totalWeight = weight * baseQty;
+    const totalWeight = weight * quantity;
     const shippingFee = getShippingFee(usShippingFees, totalWeight);
     if (shippingFee === null) {
         resultEl.textContent = "무게 초과 (미국 최대 20.0kg)";
@@ -20,7 +20,7 @@ function calculateUS() {
         return;
     }
 
-    const totalLocalPrice = localPrice * quantity * baseQty;
+    const totalLocalPrice = localPrice * quantity;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
     const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
     const totalRevenue = totalSellingPrice * 0.95;
@@ -42,7 +42,7 @@ function calculateDE() {
         return;
     }
 
-    const totalWeight = weight * baseQty;
+    const totalWeight = weight * quantity;
     const shippingCost = getShippingFee(deShippingFees, totalWeight);
     if (shippingCost === null) {
         resultEl.textContent = "무게 초과 (독일 최대 200.0kg)";
@@ -50,7 +50,7 @@ function calculateDE() {
         return;
     }
 
-    const totalLocalPrice = localPrice * quantity * baseQty;
+    const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.19) * exchangeRate * 1.085;
     const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
@@ -73,7 +73,7 @@ function calculateUK() {
         return;
     }
 
-    const totalWeight = weight * baseQty;
+    const totalWeight = weight * quantity;
     const shippingCost = getShippingFee(ukShippingFees, totalWeight);
     if (shippingCost === null) {
         resultEl.textContent = "무게 초과 (영국 최대 200.0kg)";
@@ -81,7 +81,7 @@ function calculateUK() {
         return;
     }
 
-    const totalLocalPrice = localPrice * quantity * baseQty;
+    const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.20) * exchangeRate * 1.085;
     const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
