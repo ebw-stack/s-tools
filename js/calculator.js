@@ -12,7 +12,7 @@ function calculateUS() {
         return;
     }
 
-    const totalWeight = weight * quantity;
+    const totalWeight = weight;
     const shippingFee = getShippingFee(usShippingFees, totalWeight);
     if (shippingFee === null) {
         resultEl.textContent = "무게 초과 (미국 최대 20.0kg)";
@@ -42,7 +42,7 @@ function calculateDE() {
         return;
     }
 
-    const totalWeight = weight * quantity;
+    const totalWeight = weight;
     const shippingCost = getShippingFee(deShippingFees, totalWeight);
     if (shippingCost === null) {
         resultEl.textContent = "무게 초과 (독일 최대 200.0kg)";
@@ -73,7 +73,7 @@ function calculateUK() {
         return;
     }
 
-    const totalWeight = weight * quantity;
+    const totalWeight = weight;
     const shippingCost = getShippingFee(ukShippingFees, totalWeight);
     if (shippingCost === null) {
         resultEl.textContent = "무게 초과 (영국 최대 200.0kg)";

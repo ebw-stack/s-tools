@@ -185,18 +185,17 @@
         <!-- 입력 -->
         <div class="section input-area">
             <h2>입력</h2>
-            <div class="row-3">
+            <div class="row">
                 <div style="flex:2;">
                     <label for="sellingPrice">판매가 (원)</label>
-                    <input type="text" id="sellingPrice" tabindex="1" placeholder="판매가" oninput="formatInput(this); calculateAll()">
+                    <div class="row" style="gap:4px;">
+                        <div style="flex:3;"><input type="text" id="sellingPrice" tabindex="1" placeholder="판매가" oninput="formatInput(this); calculateAll()"></div>
+                        <div style="flex:1;"><input type="text" id="baseQty" tabindex="2" value="1" placeholder="1" oninput="sanitizeInput(this); calculateAll()" style="text-align:center;"></div>
+                    </div>
                 </div>
                 <div style="flex:1;">
                     <label for="weight">무게 (kg)</label>
-                    <select id="weight" tabindex="2" onchange="calculateAll()"></select>
-                </div>
-                <div style="flex:1;">
-                    <label for="baseQty">수량</label>
-                    <input type="text" id="baseQty" tabindex="3" value="1" placeholder="1" oninput="sanitizeInput(this); calculateAll()" style="text-align:center;">
+                    <select id="weight" tabindex="3" onchange="calculateAll()"></select>
                 </div>
             </div>
             <div class="row-3">
