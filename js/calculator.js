@@ -22,9 +22,10 @@ function calculateUS() {
 
     const totalLocalPrice = localPrice * quantity * baseQty;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
-    const totalRevenue = sellingPrice * baseQty * 0.95;
+    const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
+    const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - cost);
-    showResult("usResult", "usRate2", profit, sellingPrice * baseQty);
+    showResult("usResult", "usRate2", profit, totalSellingPrice);
 }
 
 function calculateDE() {
@@ -52,9 +53,10 @@ function calculateDE() {
     const totalLocalPrice = localPrice * quantity * baseQty;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.19) * exchangeRate * 1.085;
-    const totalRevenue = sellingPrice * baseQty * 0.95;
+    const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
+    const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
-    showResult("deResult", "deRate2", profit, sellingPrice * baseQty);
+    showResult("deResult", "deRate2", profit, totalSellingPrice);
 }
 
 function calculateUK() {
@@ -82,9 +84,10 @@ function calculateUK() {
     const totalLocalPrice = localPrice * quantity * baseQty;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.20) * exchangeRate * 1.085;
-    const totalRevenue = sellingPrice * baseQty * 0.95;
+    const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
+    const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
-    showResult("ukResult", "ukRate2", profit, sellingPrice * baseQty);
+    showResult("ukResult", "ukRate2", profit, totalSellingPrice);
 }
 
 function calculateAll() {

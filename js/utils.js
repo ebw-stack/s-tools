@@ -46,6 +46,11 @@ function getBaseQty() {
     return parseInt(document.getElementById("baseQty").value) || 1;
 }
 
+function getDiscountedTotal(sellingPrice, baseQty) {
+    var unitPrice = baseQty > 1 ? sellingPrice - 3000 : sellingPrice;
+    return unitPrice * baseQty;
+}
+
 
 function showResult(elId, rateElId, profit, sellingPrice) {
     const el = document.getElementById(elId);
