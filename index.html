@@ -187,7 +187,10 @@
             <h2>입력</h2>
             <div class="row">
                 <div style="flex:2;">
-                    <label for="sellingPrice">판매가 (원)</label>
+                    <div class="row" style="gap:4px; align-items:center;">
+                        <div style="flex:3;"><label for="sellingPrice">판매가 (원)</label></div>
+                        <div style="flex:1;"><label for="baseQty">수량</label></div>
+                    </div>
                     <div class="row" style="gap:4px;">
                         <div style="flex:3;"><input type="text" id="sellingPrice" tabindex="1" placeholder="판매가" oninput="formatInput(this); calculateAll()"></div>
                         <div style="flex:1;"><input type="text" id="baseQty" tabindex="2" value="1" placeholder="1" oninput="sanitizeInput(this); calculateAll()" style="text-align:center;"></div>
