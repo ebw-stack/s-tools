@@ -4,6 +4,7 @@ function calculateUS() {
     const exchangeRate = parseFloat(document.getElementById("usRate").value);
     const weight = getWeight();
     const quantity = parseInt(document.getElementById("usQty").value) || 1;
+    const baseQty = getBaseQty();
     const resultEl = document.getElementById("usResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
@@ -20,8 +21,9 @@ function calculateUS() {
 
     const totalLocalPrice = localPrice * quantity;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
-    const profit = Math.floor(sellingPrice * 0.95 - cost);
-    showResult("usResult", "usRate2", profit, sellingPrice);
+    const totalRevenue = sellingPrice * baseQty * 0.95;
+    const profit = Math.floor(totalRevenue - cost);
+    showResult("usResult", "usRate2", profit, sellingPrice * baseQty);
 }
 
 function calculateDE() {
@@ -30,6 +32,7 @@ function calculateDE() {
     const exchangeRate = parseFloat(document.getElementById("deRate").value);
     const weight = getWeight();
     const quantity = parseInt(document.getElementById("deQty").value) || 1;
+    const baseQty = getBaseQty();
     const resultEl = document.getElementById("deResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
@@ -47,8 +50,9 @@ function calculateDE() {
     const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.19) * exchangeRate * 1.085;
-    const profit = Math.floor(sellingPrice * 0.95 - localCost - shippingCost - agencyFee);
-    showResult("deResult", "deRate2", profit, sellingPrice);
+    const totalRevenue = sellingPrice * baseQty * 0.95;
+    const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
+    showResult("deResult", "deRate2", profit, sellingPrice * baseQty);
 }
 
 function calculateUK() {
@@ -57,6 +61,7 @@ function calculateUK() {
     const exchangeRate = parseFloat(document.getElementById("ukRate").value);
     const weight = getWeight();
     const quantity = parseInt(document.getElementById("ukQty").value) || 1;
+    const baseQty = getBaseQty();
     const resultEl = document.getElementById("ukResult");
 
     if (!sellingPrice || isNaN(localPrice) || isNaN(weight)) {
@@ -74,8 +79,9 @@ function calculateUK() {
     const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.20) * exchangeRate * 1.085;
-    const profit = Math.floor(sellingPrice * 0.95 - localCost - shippingCost - agencyFee);
-    showResult("ukResult", "ukRate2", profit, sellingPrice);
+    const totalRevenue = sellingPrice * baseQty * 0.95;
+    const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
+    showResult("ukResult", "ukRate2", profit, sellingPrice * baseQty);
 }
 
 function calculateAll() {

@@ -42,6 +42,10 @@ function getWeight() {
     return parseFloat(document.getElementById("weight").value) + 1.0;
 }
 
+function getBaseQty() {
+    return parseInt(document.getElementById("baseQty").value) || 1;
+}
+
 
 function showResult(elId, rateElId, profit, sellingPrice) {
     const el = document.getElementById(elId);

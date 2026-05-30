@@ -185,14 +185,18 @@
         <!-- 입력 -->
         <div class="section input-area">
             <h2>입력</h2>
-            <div class="row">
-                <div>
+            <div class="row-3">
+                <div style="flex:2;">
                     <label for="sellingPrice">판매가 (원)</label>
                     <input type="text" id="sellingPrice" tabindex="1" placeholder="판매가" oninput="formatInput(this); calculateAll()">
                 </div>
-                <div>
+                <div style="flex:1;">
                     <label for="weight">무게 (kg)</label>
                     <select id="weight" tabindex="2" onchange="calculateAll()"></select>
+                </div>
+                <div style="flex:1;">
+                    <label for="baseQty">수량</label>
+                    <input type="text" id="baseQty" tabindex="3" value="1" placeholder="1" oninput="sanitizeInput(this); calculateAll()" style="text-align:center;">
                 </div>
             </div>
             <div class="row-3">
@@ -202,8 +206,8 @@
                         <div style="flex:1;"><label>수량</label></div>
                     </div>
                     <div class="row" style="gap:4px;">
-                        <div style="flex:2;"><input type="text" id="usPrice" tabindex="3" placeholder="$" oninput="sanitizeInput(this); calculateUS()"></div>
-                        <div style="flex:1;"><input type="text" id="usQty" tabindex="4" value="1" oninput="sanitizeInput(this); calculateUS()"></div>
+                        <div style="flex:2;"><input type="text" id="usPrice" tabindex="4" placeholder="$" oninput="sanitizeInput(this); calculateUS()"></div>
+                        <div style="flex:1;"><input type="text" id="usQty" tabindex="5" value="1" oninput="sanitizeInput(this); calculateUS()"></div>
                     </div>
                 </div>
                 <div>
@@ -212,8 +216,8 @@
                         <div style="flex:1;"><label>수량</label></div>
                     </div>
                     <div class="row" style="gap:4px;">
-                        <div style="flex:2;"><input type="text" id="dePrice" tabindex="5" placeholder="€" oninput="sanitizeInput(this); calculateDE()"></div>
-                        <div style="flex:1;"><input type="text" id="deQty" tabindex="6" value="1" oninput="sanitizeInput(this); calculateDE()"></div>
+                        <div style="flex:2;"><input type="text" id="dePrice" tabindex="6" placeholder="€" oninput="sanitizeInput(this); calculateDE()"></div>
+                        <div style="flex:1;"><input type="text" id="deQty" tabindex="7" value="1" oninput="sanitizeInput(this); calculateDE()"></div>
                     </div>
                 </div>
                 <div>
@@ -222,8 +226,8 @@
                         <div style="flex:1;"><label>수량</label></div>
                     </div>
                     <div class="row" style="gap:4px;">
-                        <div style="flex:2;"><input type="text" id="ukPrice" tabindex="7" placeholder="£" oninput="sanitizeInput(this); calculateUK()"></div>
-                        <div style="flex:1;"><input type="text" id="ukQty" tabindex="8" value="1" oninput="sanitizeInput(this); calculateUK()"></div>
+                        <div style="flex:2;"><input type="text" id="ukPrice" tabindex="8" placeholder="£" oninput="sanitizeInput(this); calculateUK()"></div>
+                        <div style="flex:1;"><input type="text" id="ukQty" tabindex="9" value="1" oninput="sanitizeInput(this); calculateUK()"></div>
                     </div>
                 </div>
             </div>
@@ -257,7 +261,7 @@
             </div>
         </div>
 
-        <button class="reset-button" tabindex="9" onclick="resetFields()">리셋</button>
+        <button class="reset-button" tabindex="10" onclick="resetFields()">리셋</button>
 
         <!-- legacy: 기존 계산기 비교 (임시) - 제거 시 이 블록 삭제 + legacy-compare.js 삭제 -->
         <div class="section" id="legacySection" style="margin-top:15px; background-color:#fff8f0; border-color:#e8d5c0;">
@@ -282,9 +286,9 @@
 
     <script src="js/nav.js?v=1"></script>
     <script src="js/data.js?v=1"></script>
-    <script src="js/utils.js?v=2"></script>
-    <script src="js/calculator.js?v=1"></script>
-    <script src="js/app.js?v=1"></script>
+    <script src="js/utils.js?v=3"></script>
+    <script src="js/calculator.js?v=2"></script>
+    <script src="js/app.js?v=2"></script>
     <!-- legacy: 제거 시 아래 1줄 삭제 -->
     <script src="js/legacy-compare.js?v=1"></script>
 </body>

@@ -35,6 +35,7 @@ function resetFields() {
     document.getElementById("deRate2").textContent = "";
     document.getElementById("ukRate2").textContent = "";
     document.getElementById("weight").value = "1";
+    document.getElementById("baseQty").value = "1";
     document.getElementById("usQty").value = "1";
     document.getElementById("deQty").value = "1";
     document.getElementById("ukQty").value = "1";
