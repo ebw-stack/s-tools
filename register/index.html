@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등록 가격 계산기</title>
+    <style>
+        body {
+            font-family: "나눔고딕", Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        h2 {
+            font-size: 16px;
+            margin: 0 0 10px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #ddd;
+        }
+        .section {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .section.input-area {
+            background-color: #f0f4ff;
+            border-color: #ccd6ee;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 3px;
+            display: block;
+            font-weight: bold;
+        }
+        input {
+            font-size: 16px;
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+        .row > div {
+            flex: 1;
+        }
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 12px 0;
+            min-height: 28px;
+        }
+        .result.red { color: red; }
+        .desc {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .nav a {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            color: #555;
+            background-color: #f8f8f8;
+            transition: background-color 0.2s;
+        }
+        .nav a.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .nav a:not(.active):hover {
+            background-color: #e9ecef;
+        }
+        .reset-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .reset-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>등록 가격 계산기</h1>
+
+        <div class="nav" id="nav"></div>
+
+        <!-- 입력 -->
+        <div class="section input-area">
+            <h2>입력</h2>
+            <div class="row">
+                <div>
+                    <label for="basePrice">기준 판매가 (원)</label>
+                    <input type="text" id="basePrice" tabindex="1" placeholder="기준 판매가" oninput="formatInput(this); calculate()">
+                </div>
+                <div>
+                    <label for="qty">수량</label>
+                    <input type="text" id="qty" tabindex="2" placeholder="수량" oninput="sanitizeInput(this); calculate()" style="text-align:center;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 -->
+        <div class="section">
+            <h2>등록 가격</h2>
+            <div id="result" class="result"></div>
+            <div id="desc" class="desc"></div>
+        </div>
+
+        <button class="reset-button" tabindex="3" onclick="resetFields()">리셋</button>
+    </div>
+
+    <script src="../js/nav.js?v=2"></script>
+    <script>
+        function parseNumber(str) {
+            return parseInt(str.replace(/,/g, "")) || 0;
+        }
+
+        function sanitizeInput(input) {
+            var pos = input.selectionStart;
+            var before = input.value;
+            input.value = before.replace(/[^0-9.,]/g, "");
+            if (input.value !== before) {
+                input.selectionStart = input.selectionEnd = pos - (before.length - input.value.length);
+            }
+        }
+
+        function formatInput(input) {
+            sanitizeInput(input);
+            var val = input.value.replace(/,/g, "");
+            if (!isNaN(val) && val !== "") {
+                input.value = parseInt(val).toLocaleString();
+            }
+        }
+
+        function calculate() {
+            var basePrice = parseNumber(document.getElementById("basePrice").value);
+            var qty = parseInt(document.getElementById("qty").value) || 0;
+            var resultEl = document.getElementById("result");
+            var descEl = document.getElementById("desc");
+
+            if (!basePrice || !qty) {
+                resultEl.textContent = "";
+                descEl.textContent = "";
+                return;
+            }
+
+            var registerPrice = (basePrice - 3000) * qty - 1000;
+            resultEl.textContent = registerPrice.toLocaleString() + "원";
+            resultEl.className = "result red";
+            descEl.textContent = "(" + basePrice.toLocaleString() + " - 3,000) × " + qty + " - 1,000";
+        }
+
+        function resetFields() {
+            document.getElementById("basePrice").value = "";
+            document.getElementById("qty").value = "";
+            document.getElementById("result").textContent = "";
+            document.getElementById("desc").textContent = "";
+            document.getElementById("basePrice").focus();
+        }
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") resetFields();
+        });
+    </script>
+</body>
+</html>

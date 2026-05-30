@@ -1,13 +1,15 @@
 (function() {
     var params = window.location.search;
     var path = window.location.pathname;
-    var isSearch = path.indexOf("/search") !== -1;
-    var base = isSearch ? "../" : "";
+    var currentKey = "index";
+    if (path.indexOf("/search") !== -1) currentKey = "search";
+    else if (path.indexOf("/register") !== -1) currentKey = "register";
+    var base = currentKey !== "index" ? "../" : "";
     var links = [
-        { href: base + "search/", key: "search", label: "아마존 검색" },
-        { href: base, key: "index", label: "마진 계산기" }
+        { href: base, key: "index", label: "마진 계산기" },
+        { href: base + "register/", key: "register", label: "등록 가격" },
+        { href: base + "search/", key: "search", label: "아마존 검색" }
     ];
-    var currentKey = isSearch ? "search" : "index";
     var nav = document.getElementById("nav");
     if (!nav) return;
     links.forEach(function(link) {
