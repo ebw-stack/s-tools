@@ -12,14 +12,15 @@ function calculateUS() {
         return;
     }
 
-    const shippingFee = getShippingFee(usShippingFees, weight);
+    const totalWeight = weight * baseQty;
+    const shippingFee = getShippingFee(usShippingFees, totalWeight);
     if (shippingFee === null) {
         resultEl.textContent = "무게 초과 (미국 최대 20.0kg)";
         resultEl.className = "result gray";
         return;
     }
 
-    const totalLocalPrice = localPrice * quantity;
+    const totalLocalPrice = localPrice * quantity * baseQty;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
     const totalRevenue = sellingPrice * baseQty * 0.95;
     const profit = Math.floor(totalRevenue - cost);
@@ -40,14 +41,15 @@ function calculateDE() {
         return;
     }
 
-    const shippingCost = getShippingFee(deShippingFees, weight);
+    const totalWeight = weight * baseQty;
+    const shippingCost = getShippingFee(deShippingFees, totalWeight);
     if (shippingCost === null) {
         resultEl.textContent = "무게 초과 (독일 최대 200.0kg)";
         resultEl.className = "result gray";
         return;
     }
 
-    const totalLocalPrice = localPrice * quantity;
+    const totalLocalPrice = localPrice * quantity * baseQty;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.19) * exchangeRate * 1.085;
     const totalRevenue = sellingPrice * baseQty * 0.95;
@@ -69,14 +71,15 @@ function calculateUK() {
         return;
     }
 
-    const shippingCost = getShippingFee(ukShippingFees, weight);
+    const totalWeight = weight * baseQty;
+    const shippingCost = getShippingFee(ukShippingFees, totalWeight);
     if (shippingCost === null) {
         resultEl.textContent = "무게 초과 (영국 최대 200.0kg)";
         resultEl.className = "result gray";
         return;
     }
 
-    const totalLocalPrice = localPrice * quantity;
+    const totalLocalPrice = localPrice * quantity * baseQty;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.20) * exchangeRate * 1.085;
     const totalRevenue = sellingPrice * baseQty * 0.95;
