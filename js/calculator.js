@@ -91,6 +91,15 @@ function calculateUK() {
 }
 
 function calculateAll() {
+    var sellingPrice = getSellingPrice();
+    var baseQty = getBaseQty();
+    if (sellingPrice && baseQty > 1) {
+        var unitPrice = sellingPrice - 3000;
+        updateAdjustedPrice(unitPrice, baseQty);
+    } else {
+        updateAdjustedPrice(0, 1);
+    }
+
     calculateUS();
     calculateDE();
     calculateUK();

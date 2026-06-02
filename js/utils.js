@@ -48,7 +48,33 @@ function getBaseQty() {
 
 function getDiscountedTotal(sellingPrice, baseQty) {
     var unitPrice = baseQty > 1 ? sellingPrice - 3000 : sellingPrice;
+    updateAdjustedPrice(unitPrice, baseQty);
     return unitPrice * baseQty;
+}
+
+function updateAdjustedPrice(unitPrice, baseQty) {
+    var tag = document.getElementById("adjustedPriceTag");
+    if (baseQty > 1) {
+        var totalPrice = unitPrice * baseQty;
+        tag.textContent = "조정 " + totalPrice.toLocaleString() + "원";
+        tag.className = "adjusted-price-tag active";
+        tag.dataset.price = totalPrice;
+    } else {
+        tag.textContent = "";
+        tag.className = "adjusted-price-tag";
+        delete tag.dataset.price;
+    }
+}
+
+function copyAdjustedPrice() {
+    var tag = document.getElementById("adjustedPriceTag");
+    var price = tag.dataset.price;
+    if (!price) return;
+    navigator.clipboard.writeText(price).then(function() {
+        var original = "조정 " + parseInt(price).toLocaleString() + "원";
+        tag.innerHTML = '<span class="copy-feedback">복사됨!</span>';
+        setTimeout(function() { tag.textContent = original; }, 1000);
+    });
 }
 
 

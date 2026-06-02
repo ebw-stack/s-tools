@@ -39,6 +39,7 @@ function resetFields() {
     document.getElementById("usQty").value = "1";
     document.getElementById("deQty").value = "1";
     document.getElementById("ukQty").value = "1";
+    updateAdjustedPrice(0, 1);
     document.getElementById("sellingPrice").focus();
 }
 
