@@ -185,10 +185,10 @@
                 return;
             }
 
-            var registerPrice = (basePrice - 3000) * qty - 1000;
+            var registerPrice = (basePrice - 3000) * qty;
             resultEl.textContent = registerPrice.toLocaleString() + "원";
             resultEl.className = "result red";
-            descEl.textContent = "(" + basePrice.toLocaleString() + " - 3,000) × " + qty + " - 1,000";
+            descEl.textContent = "(" + basePrice.toLocaleString() + " - 3,000) × " + qty;
         }
 
         function resetFields() {
