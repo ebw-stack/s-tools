@@ -87,7 +87,7 @@ function showResult(elId, rateElId, profit, sellingPrice) {
     el.className = "result " + color;
 
     if (sellingPrice) {
-        const marginRate = Math.round((profit / sellingPrice) * 100);
+        const marginRate = ((profit / sellingPrice) * 100).toFixed(1);
         rateEl.textContent = marginRate + "%";
         rateEl.className = "margin-rate " + color;
     }
