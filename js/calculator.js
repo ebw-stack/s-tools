@@ -12,13 +12,14 @@ function calculateUS() {
         return;
     }
 
-    const totalWeight = weight;
-    const shippingFee = getShippingFee(usShippingFees, totalWeight);
-    if (shippingFee === null) {
-        resultEl.textContent = "무게 초과 (미국 최대 20.0kg)";
+    const lbWeight = Math.ceil(weight * 2.20462);
+    const shippingFeeUSD = getShippingFee(usShippingFees, lbWeight);
+    if (shippingFeeUSD === null) {
+        resultEl.textContent = "무게 초과 (미국 최대 500lb)";
         resultEl.className = "result gray";
         return;
     }
+    const shippingFee = shippingFeeUSD * US_SHIPPING_RATE;
 
     const totalLocalPrice = localPrice * quantity;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
