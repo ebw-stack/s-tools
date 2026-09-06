@@ -102,7 +102,7 @@ const usShippingFees = {
     496: 949.00, 497: 950.90, 498: 952.80, 499: 954.70, 500: 956.60
 };
 
-const US_SHIPPING_RATE = 1550;
+const US_SHIPPING_RATE = 1400;
 
 const deShippingFees = {
     0.5: 10340, 1.0: 12770, 1.5: 16080, 2.0: 17520, 2.5: 19550,

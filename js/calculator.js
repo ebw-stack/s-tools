@@ -12,14 +12,17 @@ function calculateUS() {
         return;
     }
 
-    const lbWeight = Math.ceil(weight * 2.20462);
-    const shippingFeeUSD = getShippingFee(usShippingFees, lbWeight);
-    if (shippingFeeUSD === null) {
-        resultEl.textContent = "무게 초과 (미국 최대 500lb)";
-        resultEl.className = "result gray";
-        return;
+    let shippingFee = 0;
+    if (isShippingIncluded()) {
+        const lbWeight = Math.ceil(weight * 2.20462);
+        const shippingFeeUSD = getShippingFee(usShippingFees, lbWeight);
+        if (shippingFeeUSD === null) {
+            resultEl.textContent = "무게 초과 (미국 최대 500lb)";
+            resultEl.className = "result gray";
+            return;
+        }
+        shippingFee = shippingFeeUSD * US_SHIPPING_RATE;
     }
-    const shippingFee = shippingFeeUSD * US_SHIPPING_RATE;
 
     const totalLocalPrice = localPrice * quantity;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
@@ -43,12 +46,15 @@ function calculateDE() {
         return;
     }
 
-    const totalWeight = weight;
-    const shippingCost = getShippingFee(deShippingFees, totalWeight);
-    if (shippingCost === null) {
-        resultEl.textContent = "무게 초과 (독일 최대 200.0kg)";
-        resultEl.className = "result gray";
-        return;
+    let shippingCost = 0;
+    if (isShippingIncluded()) {
+        const totalWeight = weight;
+        shippingCost = getShippingFee(deShippingFees, totalWeight);
+        if (shippingCost === null) {
+            resultEl.textContent = "무게 초과 (독일 최대 200.0kg)";
+            resultEl.className = "result gray";
+            return;
+        }
     }
 
     const totalLocalPrice = localPrice * quantity;
@@ -74,12 +80,15 @@ function calculateUK() {
         return;
     }
 
-    const totalWeight = weight;
-    const shippingCost = getShippingFee(ukShippingFees, totalWeight);
-    if (shippingCost === null) {
-        resultEl.textContent = "무게 초과 (영국 최대 200.0kg)";
-        resultEl.className = "result gray";
-        return;
+    let shippingCost = 0;
+    if (isShippingIncluded()) {
+        const totalWeight = weight;
+        shippingCost = getShippingFee(ukShippingFees, totalWeight);
+        if (shippingCost === null) {
+            resultEl.textContent = "무게 초과 (영국 최대 200.0kg)";
+            resultEl.className = "result gray";
+            return;
+        }
     }
 
     const totalLocalPrice = localPrice * quantity;

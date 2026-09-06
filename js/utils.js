@@ -42,6 +42,11 @@ function getWeight() {
     return parseFloat(document.getElementById("weight").value) + 1.0;
 }
 
+function isShippingIncluded() {
+    const el = document.getElementById("includeShipping");
+    return el ? el.checked : true;
+}
+
 function getBaseQty() {
     return parseInt(document.getElementById("baseQty").value) || 1;
 }

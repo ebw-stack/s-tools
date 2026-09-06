@@ -18,9 +18,9 @@ function initDropdowns() {
         weightEl.appendChild(opt);
     });
 
-    populateSelect(document.getElementById("usRate"), 1200, 1700, 10, 1600);
-    populateSelect(document.getElementById("deRate"), 1450, 1900, 10, 1850);
-    populateSelect(document.getElementById("ukRate"), 1650, 2200, 10, 2100);
+    populateSelect(document.getElementById("usRate"), 1200, 1700, 10, 1520);
+    populateSelect(document.getElementById("deRate"), 1450, 1900, 10, 1760);
+    populateSelect(document.getElementById("ukRate"), 1650, 2200, 10, 2020);
 }
 
 function resetFields() {
