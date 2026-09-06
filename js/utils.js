@@ -38,13 +38,14 @@ function getSellingPrice() {
     return parseNumber(document.getElementById("sellingPrice").value);
 }
 
-function getWeight() {
-    return parseFloat(document.getElementById("weight").value) + 1.0;
+function isWeightMarginIncluded() {
+    const el = document.getElementById("addWeightMargin");
+    return el ? el.checked : true;
 }
 
-function isShippingIncluded() {
-    const el = document.getElementById("includeShipping");
-    return el ? el.checked : true;
+function getWeight() {
+    const weight = parseFloat(document.getElementById("weight").value);
+    return isWeightMarginIncluded() ? weight + 1.0 : weight;
 }
 
 function getBaseQty() {
