@@ -187,6 +187,12 @@
         .reset-button:hover {
             background-color: #c82333;
         }
+        .rate-status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            min-height: 16px;
+        }
     </style>
 </head>
 <body>
@@ -216,6 +222,11 @@
                 <input type="checkbox" id="addWeightMargin" checked onchange="calculateAll()">
                 배송 무게 +1kg 포함
             </label>
+            <label class="checkbox-label" for="sellingRate">
+                <input type="checkbox" id="sellingRate" onchange="applyRateMode()">
+                판매용 환율 적용 (현재 환율 🇺🇸+5% / 🇩🇪🇬🇧+7%)
+            </label>
+            <div id="rateStatus" class="rate-status"></div>
         </div>
 
         <!-- 입력 -->
@@ -306,7 +317,7 @@
     <script src="js/data.js?v=3"></script>
     <script src="js/utils.js?v=9"></script>
     <script src="js/calculator.js?v=4"></script>
-    <script src="js/app.js?v=4"></script>
+    <script src="js/app.js?v=5"></script>
 
 </body>
 </html>

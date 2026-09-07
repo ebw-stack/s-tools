@@ -1,3 +1,9 @@
+// 기본(실제 구매용) 환율
+const purchaseRates = { us: 1520, de: 1760, uk: 2020 };
+// 판매용 환율 = 현재 환율 × 가산율
+const sellingMargins = { us: 1.05, de: 1.07, uk: 1.07 };
+let liveRates = null;  // 조회한 현재 환율 캐시
+
 function populateSelect(el, start, end, step, defaultVal) {
     for (let i = start; i <= end; i += step) {
         const opt = document.createElement("option");
@@ -18,9 +24,65 @@ function initDropdowns() {
         weightEl.appendChild(opt);
     });
 
-    populateSelect(document.getElementById("usRate"), 1200, 1700, 10, 1520);
-    populateSelect(document.getElementById("deRate"), 1450, 1900, 10, 1760);
-    populateSelect(document.getElementById("ukRate"), 1650, 2200, 10, 2020);
+    populateSelect(document.getElementById("usRate"), 1200, 1700, 10, purchaseRates.us);
+    populateSelect(document.getElementById("deRate"), 1450, 1900, 10, purchaseRates.de);
+    populateSelect(document.getElementById("ukRate"), 1650, 2200, 10, purchaseRates.uk);
+}
+
+// 10원 단위로 반올림하고 셀렉트 범위를 벗어나면 양 끝값으로 맞춘다
+function setRate(elId, value) {
+    const el = document.getElementById(elId);
+    const opts = Array.from(el.options).map(o => Number(o.value));
+    const rounded = Math.round(value / 10) * 10;
+    el.value = Math.min(Math.max(rounded, opts[0]), opts[opts.length - 1]);
+}
+
+async function fetchLiveRates() {
+    const res = await fetch("https://open.er-api.com/v6/latest/USD");
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    const krw = data.rates.KRW;
+    return {
+        us: krw,
+        de: krw / data.rates.EUR,
+        uk: krw / data.rates.GBP,
+        updated: data.time_last_update_unix
+    };
+}
+
+async function applyRateMode() {
+    const checkbox = document.getElementById("sellingRate");
+    const statusEl = document.getElementById("rateStatus");
+
+    // 해제 → 기본(실제 구매용) 환율로 복귀
+    if (!checkbox.checked) {
+        setRate("usRate", purchaseRates.us);
+        setRate("deRate", purchaseRates.de);
+        setRate("ukRate", purchaseRates.uk);
+        statusEl.textContent = "";
+        calculateAll();
+        return;
+    }
+
+    // 체크 → 현재 환율에 가산율 적용
+    checkbox.disabled = true;
+    statusEl.textContent = "현재 환율 불러오는 중...";
+    try {
+        if (!liveRates) liveRates = await fetchLiveRates();
+        setRate("usRate", liveRates.us * sellingMargins.us);
+        setRate("deRate", liveRates.de * sellingMargins.de);
+        setRate("ukRate", liveRates.uk * sellingMargins.uk);
+        calculateAll();
+
+        const d = new Date(liveRates.updated * 1000);
+        statusEl.textContent = `${d.getMonth() + 1}/${d.getDate()} 기준 `
+            + `${Math.round(liveRates.us)} / ${Math.round(liveRates.de)} / ${Math.round(liveRates.uk)}`;
+    } catch (e) {
+        checkbox.checked = false;
+        statusEl.textContent = "환율을 불러오지 못했습니다.";
+    } finally {
+        checkbox.disabled = false;
+    }
 }
 
 function resetFields() {
