@@ -23,7 +23,7 @@ function calculateUS() {
 
     const totalLocalPrice = localPrice * quantity;
     const cost = totalLocalPrice * exchangeRate * 1.024 + shippingFee;
-    const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
+    const totalSellingPrice = getTotalSellingPrice(sellingPrice, baseQty);
     const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - cost);
     showResult("usResult", "usRate2", profit, totalSellingPrice);
@@ -54,7 +54,7 @@ function calculateDE() {
     const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.19) * exchangeRate * 1.085;
-    const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
+    const totalSellingPrice = getTotalSellingPrice(sellingPrice, baseQty);
     const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
     showResult("deResult", "deRate2", profit, totalSellingPrice);
@@ -85,7 +85,7 @@ function calculateUK() {
     const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
     const localCost = (totalLocalPrice / 1.20) * exchangeRate * 1.085;
-    const totalSellingPrice = getDiscountedTotal(sellingPrice, baseQty);
+    const totalSellingPrice = getTotalSellingPrice(sellingPrice, baseQty);
     const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
     showResult("ukResult", "ukRate2", profit, totalSellingPrice);
@@ -94,12 +94,7 @@ function calculateUK() {
 function calculateAll() {
     var sellingPrice = getSellingPrice();
     var baseQty = getBaseQty();
-    if (sellingPrice && baseQty > 1) {
-        var unitPrice = sellingPrice - 3000;
-        updateAdjustedPrice(unitPrice, baseQty);
-    } else {
-        updateAdjustedPrice(0, 1);
-    }
+    updateAdjustedPrice(sellingPrice, sellingPrice ? baseQty : 1);
 
     calculateUS();
     calculateDE();

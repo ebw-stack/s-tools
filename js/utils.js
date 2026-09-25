@@ -52,10 +52,9 @@ function getBaseQty() {
     return parseInt(document.getElementById("baseQty").value) || 1;
 }
 
-function getDiscountedTotal(sellingPrice, baseQty) {
-    var unitPrice = baseQty > 1 ? sellingPrice - 3000 : sellingPrice;
-    updateAdjustedPrice(unitPrice, baseQty);
-    return unitPrice * baseQty;
+function getTotalSellingPrice(sellingPrice, baseQty) {
+    updateAdjustedPrice(sellingPrice, baseQty);
+    return sellingPrice * baseQty;
 }
 
 function updateAdjustedPrice(unitPrice, baseQty) {
