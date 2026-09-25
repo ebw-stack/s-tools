@@ -43,6 +43,12 @@ function isWeightMarginIncluded() {
     return el ? el.checked : true;
 }
 
+// 면세(VAT 환급)가 되지 않으면 현지 부가세를 원가에 그대로 포함한다
+function getVatDivisor(checkboxId, vatRate) {
+    const el = document.getElementById(checkboxId);
+    return el && el.checked ? 1 : vatRate;
+}
+
 function getWeight() {
     const weight = parseFloat(document.getElementById("weight").value);
     return isWeightMarginIncluded() ? weight + 1.0 : weight;

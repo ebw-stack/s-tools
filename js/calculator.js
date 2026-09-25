@@ -53,7 +53,7 @@ function calculateDE() {
 
     const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
-    const localCost = (totalLocalPrice / 1.19) * exchangeRate * 1.085;
+    const localCost = (totalLocalPrice / getVatDivisor("deTaxable", 1.19)) * exchangeRate * 1.085;
     const totalSellingPrice = getTotalSellingPrice(sellingPrice, baseQty);
     const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);
@@ -84,7 +84,7 @@ function calculateUK() {
 
     const totalLocalPrice = localPrice * quantity;
     const agencyFee = getAgencyFee(totalLocalPrice);
-    const localCost = (totalLocalPrice / 1.20) * exchangeRate * 1.085;
+    const localCost = (totalLocalPrice / getVatDivisor("ukTaxable", 1.20)) * exchangeRate * 1.085;
     const totalSellingPrice = getTotalSellingPrice(sellingPrice, baseQty);
     const totalRevenue = totalSellingPrice * 0.95;
     const profit = Math.floor(totalRevenue - localCost - shippingCost - agencyFee);

@@ -62,6 +62,14 @@
             width: auto;
             margin: 0;
         }
+        .vat-row {
+            display: flex;
+            gap: 16px;
+        }
+        .vat-row label.checkbox-label {
+            font-size: 13px;
+            font-weight: normal;
+        }
         input, select {
             font-size: 16px;
             padding: 8px;
@@ -280,6 +288,16 @@
                     </div>
                 </div>
             </div>
+            <div class="vat-row">
+                <label class="checkbox-label" for="deTaxable">
+                    <input type="checkbox" id="deTaxable" onchange="calculateDE()">
+                    🇩🇪 면세 불가 (VAT 19% 포함)
+                </label>
+                <label class="checkbox-label" for="ukTaxable">
+                    <input type="checkbox" id="ukTaxable" onchange="calculateUK()">
+                    🇬🇧 면세 불가 (VAT 20% 포함)
+                </label>
+            </div>
         </div>
 
         <!-- 결과 -->
@@ -315,9 +333,9 @@
 
     <script src="js/nav.js?v=1"></script>
     <script src="js/data.js?v=3"></script>
-    <script src="js/utils.js?v=10"></script>
-    <script src="js/calculator.js?v=5"></script>
-    <script src="js/app.js?v=5"></script>
+    <script src="js/utils.js?v=11"></script>
+    <script src="js/calculator.js?v=6"></script>
+    <script src="js/app.js?v=6"></script>
 
 </body>
 </html>
